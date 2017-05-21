@@ -68,6 +68,11 @@
 		<center>
 		<div align="left">
 		<br><br>
+			<c:if test="${empty bookslimit.books}">
+				<div>
+					<<img src="images/error.jpg" alt="错误页面显示" style="width: 1300px;">
+				</div>
+			</c:if>
 			<c:forEach items="${bookslimit.books }" var="book">
  			<div style="float: left;width: 30%;heigth:300px;margin-left:40px">
 					<img alt="${book.bookname }" src="bookimg/${book.bookid}.jpg" width="251" height="307">

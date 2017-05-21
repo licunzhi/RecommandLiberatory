@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,6 +48,11 @@
 
 <body style="background-color: #e2e2e2">
 <a href="LoginAction_doIndex">返回主页</a>
+<c:if test="${bookspage.pageNo == 0}">
+	<div>
+		<<img src="images/error.jpg" alt="错误页面显示" style="width: 1300px;">
+	</div>
+</c:if>
 	<center>
 		<div align="left">
 		<br><br>
@@ -61,7 +67,8 @@
 			</c:forEach>
 		</div>
 	</center>
-	
+
+
 	<br><br><br>
 	<div style="position:fixed;bottom:0;">
 		<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
