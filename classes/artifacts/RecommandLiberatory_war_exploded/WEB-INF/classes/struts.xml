@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true" />
+
+	<package name="recommandBook" extends="struts-default" namespace="/">
+	
+	<!-- 定义一个自己的拦截器    myinterceptor -->
+	<interceptors>
+		<interceptor name="myinterceptor" class="com.caoguimei.interceptor.MyInterceptor"></interceptor>
+		<!-- 默认的拦截器的名字 -->
+		<interceptor-stack name="mydefault">
+			<interceptor-ref name="myinterceptor">
+			<!-- 过滤一些指定的方法   实现点击指定链接的时候缓存中必须有相应的用户的登陆 -->
+				<param name="includeMethods">getFirstPagesBooks,doIndex,toLimitPage,toUserFavor,toViewHisPage,toFireBooksPage,toRandomBooksPage,toCollectBugsPage</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</interceptor-stack>
+	</interceptors>
+	
+	<default-interceptor-ref name="mydefault"></default-interceptor-ref>
+	
+	
+		<!-- 定义全局结果 -->
+		<global-results>
+			<result name="indexpage">/index.jsp</result>
+			<result name="loginpage">/login.jsp</result>
+			<result name="loginpage1">/adminlogin.jsp</result>
+			<result name="successpage">/success.jsp</result>
+			<result name="input">/fail.jsp</result>
+		</global-results>
+
+
+	<!-- 登陆相关的action  通配符的使用-->	
+	<action name="LoginAction_*" class="loginAction" method="{1}">
+		<result name="loginpage">/login.jsp</result>
+		<result name="registerpage">/register.jsp</result>
+		<result name="loginPageAction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">LoginAction_doLogin</param>
+		</result>
+		<result name="toIndexAction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">LoginAction_doIndex</param>
+		</result>
+		<result name="adminloginPageAction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">AdminAction_toAdminPage</param>
+		</result>
+		<result name="toUserListAction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">LoginAction_toUserListPage</param>
+		</result>
+		<result name="touserfavorpageaction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">LoginAction_toUserFavor</param>
+		</result>
+		<result name="userListPage">/userlist.jsp</result>
+		<result name="userListPageCopy">/userlistcopy.jsp</result>
+		<result name="modifypage">/modify.jsp</result>
+		<result name="choosefavorpage">/choosefavor.jsp</result>
+		<result name="touserfavorpage">/userfavorbook.jsp</result>
+	</action>
+
+	<!-- 注册相关的action-->
+	<action name="RegisterAction_*" class="registerAction" method="{1}">
+		<result name="success">/success.jsp</result>
+		<result name="input">/fail.jsp</result>
+		<result name="toRegisterAction" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">LoginAction_toRegisterPage</param>
+		</result>
+	</action>
+	
+	
+	<!-- 书籍相关的action -->
+	<action name="BooksAction_*" class="booksAction" method="{1}">
+		<result name="addBookPage">/addbook.jsp</result>
+		<result name="bookslistpage">/bookslist.jsp</result>
+		<result name="searchbookspage">/searchbooks.jsp</result>
+		<result name="bookinfopage">/bookinfo.jsp</result>
+		<result name="viewhistorypage">/viewhistory.jsp</result>
+		<result name="firebookspage">/firebooks.jsp</result>
+		<result name="randombookspage">/randombooks.jsp</result>
+		<result name="allbookslistpage">/bookslistpage.jsp</result>
+		<result name="showbookdetial">/showbookdetial.jsp</result>
+		<result name="showonebookinfo">/showonebookinfo.jsp</result>
+		<result name="viewAction" type="redirectAction">
+			<param name="namespace">/</param>
+			<param name="actionName">BooksAction_toViewHisPage</param>
+		</result>
+		<result name="toShowBooksListAction" type="redirectAction">
+			<param name="namespace">/</param>
+			<param name="actionName">BooksAction_toBooksListPage</param>
+		</result>
+	</action>
+	
+	
+	<action name="AdminAction_*" class="adminAction" method="{1}">
+		<result name="adminpage">/adminlogin.jsp</result>
+		<result name="adminLoginAction" type="redirectAction">
+			<param name="namespace">/</param>
+			<param name="actionName">/AdminAction_toAdminPage</param>
+		</result>
+		<result name="toAdminSuccessPage">/admin.jsp</result>
+		<result name="toAdminIndexPage">/admin.jsp</result>
+	</action>
+
+	<action name="BugsAction_*" class="bugsAction" method="{1}">
+		<result name="collectbugspage">/collectbugs.jsp</result>
+		<result name="bugslistpage">/bugslistpage.jsp</result>
+		<result name="showdetailpage">/showdetailpage.jsp</result>
+		<result name="toBugsListAction" type="redirectAction">
+			<param name="namespace">/</param>
+			<param name="actionName">BugsAction_toBugsListPage</param>
+		</result>
+	</action>
+	</package>
+</struts>

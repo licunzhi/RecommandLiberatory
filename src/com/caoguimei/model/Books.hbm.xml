@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-1-7 17:19:28 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.caoguimei.model.Books" table="BOOKS">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="bookid" type="java.lang.String">
+            <column name="BOOKID" />
+        </property>
+        <property name="bookname" type="java.lang.String">
+            <column name="BOOKNAME" />
+        </property>
+        <property name="bookauthor" type="java.lang.String">
+            <column name="BOOKAUTHOR" />
+        </property>
+        <property name="bookkind" type="java.lang.String">
+            <column name="BOOKKIND" />
+        </property>
+         <property name="majorid" type="java.lang.String">
+            <column name="MAJORID" />
+        </property>
+        <property name="viewtimes" type="java.lang.Long">
+        	<column name="VIEWTIMES"></column>
+        </property>
+        <property name="booksinformation" type="java.lang.String">
+        	<column name="BOOKSINFORMATION"></column>
+        </property>
+    </class>
+</hibernate-mapping>
